@@ -4,13 +4,16 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
+    const seen = new Map();
     for (let i = 0; i < nums.length; i++){
-        // console.log(i);
-        for (let j = i+1; j < nums.length; j++){
-            if (nums[i] + nums[j] === target) {
-                return [i,j]
-            }
-            // console.log(`${i},${j}`);
+        let newTarget = target - nums[i];
+        if (seen.has(`${newTarget}`)){
+            return [i,seen.get(`${newTarget}`)];
+        }
+        seen.set(`${nums[i]}`, i);
     }
-    }
-};
+}
+// this is a brute force. Here is another idea, 
+// Add each thing you find into a dictionary / map
+// then use target - value for each value, and lookup into the dictionary until you find (2n?)
+
