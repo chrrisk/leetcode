@@ -3,14 +3,16 @@
  * @return {boolean}
  */
 var containsDuplicate = function(nums) {
-    const countSeen = new Map();
-    for (let i = 0; i < nums.length; i++){
-        if (countSeen.has(nums[i])){
-            // countSeen.set(`${nums[i]}`,countSeen.get(`${nums[i]}`));
-            return true;
-        } else{
-            countSeen.set(nums[i],1);
+    const counts = new Map();
+    for (let n of nums) {
+        if (counts.has(n)) {
+            counts.set(n, counts.get(n) + 1);
+        } else {
+            counts.set(n, 1);
         }
+    }
+    for (const [num, count] of counts) {
+        if (count > 1) return true;
     }
     return false;
 };
